@@ -1,0 +1,482 @@
+\documentclass[10pt,letterpaper,twoside]{book}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.7cm,bottom=2.2cm,headsep=10pt]{geometry}
+\usepackage{mathpazo}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage[hidelinks,pdfusetitle]{hyperref}
+\usepackage{titlesec}
+
+% --- angle macros used throughout the generated tables ---
+\newcommand{\dg}{\ensuremath{{}^{\circ}}}
+\newcommand{\pr}{\ensuremath{{}^{\prime}}}
+
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.05}
+\emergencystretch=4em
+\hyphenpenalty=1000
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\small\thepage}
+\fancyhead[RE]{\small\itshape The Sextant Navigator's Almanac 2026}
+\fancyhead[LO]{\small\itshape\leftmark}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{16pt}{\Huge}
+
+% inline data macros produced by generate_tables.wls
+\input{tables/macros.tex}
+
+\title{The Sextant Navigator's Almanac \& Sight-Reduction Handbook (2026)}
+\author{Generated from the open-source \textsc{SextantNavigation} ephemeris engine}
+\date{Edition of \genDate}
+
+\begin{document}
+\frontmatter
+
+% ============================ TITLE PAGE ============================
+\begin{titlepage}
+\centering
+\vspace*{2.2cm}
+{\Huge\bfseries The Sextant Navigator's\\[4pt] Almanac 2026\par}
+\vspace{6pt}
+{\Large\itshape \& Sight-Reduction Handbook\par}
+\vspace{1.4cm}
+{\large A self-contained nautical almanac and paper sight-reduction manual,\\
+computed entirely from a validated, open-source celestial-navigation engine.\par}
+\vfill
+{\large Greenwich Hour Angle and Declination of the Sun,\\
+GHA of Aries, and the 58 navigational stars, for the year 2026 (UT).\par}
+\vspace{1.2cm}
+{\normalsize Generated from \textsc{SextantNavigation}\\
+\url{https://github.com/mthiel74/SextantNavigation}\par}
+\vspace{0.6cm}
+{\small Edition of \genDate\par}
+\vspace{0.4cm}
+{\footnotesize \textcopyright{} 2026 Marco Thiel. Licensed under Creative Commons
+Attribution 4.0 International (CC BY 4.0).\par}
+\vfill
+{\footnotesize\bfseries FOR EDUCATION AND PRACTICE ONLY --- NOT FOR SOLE-MEANS NAVIGATION\par}
+\end{titlepage}
+
+% ============================ DISCLAIMER ============================
+\thispagestyle{empty}
+\vspace*{1.5cm}
+\begin{tcolorbox}[colback=red!5!white,colframe=red!60!black,boxrule=1.2pt,
+  arc=3pt,title=\bfseries IMPORTANT --- READ BEFORE USE,fonttitle=\large]
+\large
+This almanac and handbook are an \textbf{educational deliverable}. Every number
+in it was computed offline from the open-source ephemeris engine at
+\url{https://github.com/mthiel74/SextantNavigation}, not copied from an official
+publication.
+
+\medskip
+\textbf{Accuracy.} The underlying engine agrees with JPL for the Sun's geographic
+position to about \textbf{0.14$\pr$}, reproduces Meeus' lunar worked example to
+0.002$\pr$ (geocentric), and precesses the star catalogue with IAU--1976
+precession plus proper motion. Realistic end-to-end accuracy for a reduced sight
+is on the order of \textbf{one arcminute (about one nautical mile)}. That is good
+enough to \emph{learn and practise} celestial navigation, and to check your paper
+arithmetic --- but it is \textbf{not} certified for life-safety use.
+
+\medskip
+\textbf{Do not use this document as your sole means of navigation at sea.} For
+real voyages, use an official \emph{Nautical Almanac} (HM Nautical Almanac Office
+/ US Naval Observatory) and cross-check every figure. The authors accept no
+liability for any use of this material.
+\end{tcolorbox}
+
+\bigskip
+\noindent{\small\textbf{Sources \& method.} The positions in this book are
+\emph{computed with the Wolfram Language}, not reproduced from any published
+almanac. The Sun's geographic
+position is from the low-precision solar formulae of the \emph{Astronomical
+Almanac}; the Moon from Meeus's abridged ELP theory (\emph{Astronomical
+Algorithms}, ch.~47); Greenwich sidereal time from the IAU GMST formula; and the
+star places are propagated from \emph{Hipparcos} catalogue (ESA) J2000 mean
+positions using IAU--1976 precession and catalogue proper motions to epoch~2026.5.
+Full source code and tests: \url{https://github.com/mthiel74/SextantNavigation}.}
+
+\medskip
+\noindent{\small\textbf{Acknowledgements.} All computations and tables were
+produced with the \emph{Wolfram Language} (Wolfram Research). This almanac
+gratefully builds on published astronomy: the star catalogue derives from the
+ESA \emph{Hipparcos} mission; the lunar theory follows Jean Meeus,
+\emph{Astronomical Algorithms}; and the solar and sidereal-time formulae follow
+the conventions of the IAU and the \emph{Astronomical Almanac} (HM Nautical
+Almanac Office / US Naval Observatory). It is an independent, open-source
+companion to the article cited above, and is not affiliated with, or endorsed
+by, any of these organisations.}
+
+\vfill
+\begin{center}\small
+Source engine, tests, and this document: \url{https://github.com/mthiel74/SextantNavigation}\\
+Companion article: \url{https://community.wolfram.com/groups/-/m/t/3743363}
+\end{center}
+\clearpage
+
+% ============================ HOW TO USE ============================
+\chapter*{How to use this almanac}
+\addcontentsline{toc}{chapter}{How to use this almanac}
+\markboth{How to use this almanac}{How to use this almanac}
+
+All times in the data tables are \textbf{Universal Time (UT)}, the time kept by
+your chronometer set to Greenwich. All angles are given in degrees and decimal
+minutes to $0.1\pr$, the same precision as a commercial nautical almanac.
+
+\paragraph{To reduce a sight you need four numbers for the instant of your
+observation:} the body's \emph{Greenwich Hour Angle} (GHA) and \emph{Declination}
+(Dec), your \emph{assumed position}, and your \emph{observed altitude} $H_o$.
+This book supplies the first two:
+
+\begin{itemize}[nosep]
+\item \textbf{Sun.} Turn to Part~II, find the month, then the row for your day and
+      the whole hour of UT. Read GHA and Dec directly. For the odd minutes and
+      seconds, add the increment from Part~IV (the Sun's GHA grows a steady
+      $15\dg$ per hour). Declination changes so slowly you may interpolate it by eye.
+\item \textbf{A star.} Turn to Part~III. Read \textbf{GHA Aries} for your day and
+      hour, then add the star's \textbf{SHA} (Sidereal Hour Angle) from the star
+      table: $\text{GHA}_\star = \text{GHA Aries} + \text{SHA}$. The star's
+      declination is taken straight from the table. Add the Part~IV increment for
+      minutes and seconds (Aries runs at $15.041\dg$ per hour).
+\end{itemize}
+
+\paragraph{Then work the triangle.} Part~I explains, step by step and with fully
+worked 2026 examples, how to correct your sextant reading and turn these numbers
+into a line of position on your chart.
+
+\tableofcontents
+
+\mainmatter
+
+% ============================================================
+% PART I
+% ============================================================
+\part{Finding Yourself with a Sextant}
+\chapter{The idea: circles of equal altitude}
+
+When you measure the altitude of a celestial body --- the angle between it and
+the horizon --- you learn one thing about where you are: your distance from the
+body's \emph{geographic position} (GP), the point on the Earth's surface directly
+beneath it. If the Sun's measured altitude is $H_o$, then your \emph{zenith
+distance} is
+\[
+  z = 90\dg - H_o ,
+\]
+and $z$, expressed in arcminutes, is exactly your great-circle distance from the
+GP in nautical miles (one minute of arc on the Earth $=$ one nautical mile). You
+must therefore lie somewhere on a circle of radius $z$ centred on the GP: a
+\textbf{circle of equal altitude}.
+
+One sight gives a circle. A \emph{second} sight of another body (or the same body
+later) gives a second circle, and two circles cross at two points. A \emph{third}
+sight resolves which of the two intersections is really you. In practice we never
+draw these enormous circles; near your estimated position each circle is
+indistinguishable from its tangent straight line, the \textbf{line of position}
+(LOP), and we plot those instead. That is the method of this chapter.
+
+\section{What you need}
+\begin{itemize}[nosep]
+\item A \textbf{sextant} to measure altitude $H_s$ above the sea horizon.
+\item An accurate \textbf{clock on UT} (a chronometer). An error of 4 seconds of
+      time moves your fix about one nautical mile in longitude.
+\item This \textbf{almanac}, for GHA and Dec of the body.
+\item A \textbf{dead-reckoning (DR) position}: your best estimate of where you are,
+      used to pick an ``assumed position'' close by.
+\item Plotting sheet, dividers, parallel rule, and a pocket calculator with
+      trigonometric functions (or the concise sight-reduction tables).
+\end{itemize}
+
+\chapter{Correcting the sight}
+
+The raw sextant altitude $H_s$ is not yet the true altitude of the body's centre.
+Apply, in order:
+
+\begin{enumerate}[nosep]
+\item \textbf{Index error} $I$. Your own sextant's zero error, found by sighting
+      the horizon. Subtract if ``on the arc'', add if ``off the arc''.
+\item \textbf{Dip} of the horizon. Because your eye is above the sea, the visible
+      horizon is depressed below the true horizontal by
+      \[ \text{Dip} = 1.76\sqrt{h}\ \text{arcminutes}, \qquad h=\text{height of eye in metres.} \]
+      Always subtract. (See the table in Part~IV.)
+\item \textbf{Refraction} $R$. The atmosphere bends the light down, raising the
+      apparent altitude; subtract $R$. This almanac uses Bennett's formula,
+      $R = \cot\!\big(H_a + 7.31/(H_a+4.4)\big)$ arcminutes, evaluated at the
+      apparent altitude $H_a$ (altitude after index error and dip). Refraction is
+      about $1\pr$ at $45\dg$ but $10\pr$ near the horizon.
+\item \textbf{Semidiameter} (Sun and Moon). You bring the \emph{limb} (edge), not
+      the centre, to the horizon. Add the semidiameter (SD) for a lower-limb sight,
+      subtract it for an upper-limb sight. The Sun's SD is about $16\pr$; the exact
+      monthly value is tabulated in Part~IV.
+\item \textbf{Parallax} (Moon, and slightly the Sun). A near body is seen against
+      the stars from a slightly different direction than it would be from the
+      Earth's centre. The correction, always \emph{added}, is
+      \[ P = \arcsin\!\big(\sin(\mathrm{HP})\cos H\big) \approx \mathrm{HP}\cos H, \]
+      where HP is the horizontal parallax. For the Moon HP is about $57\pr$, so the
+      parallax reaches nearly a full degree; for the Sun it is a negligible
+      $0.1\pr$. Stars are effectively infinitely far away: no parallax, no
+      semidiameter.
+\end{enumerate}
+
+The result is the \textbf{observed altitude}
+\[
+  H_o = H_s - I - \text{Dip} - R \;(\pm\,\text{SD})\;(+\,P).
+\]
+
+\chapter{Sight reduction: the Marcq St-Hilaire intercept}
+
+We cannot solve for position directly, so we \emph{guess} an assumed position (AP)
+close to our DR and ask: \emph{if I were at the AP, what altitude and bearing
+would the body have?} Comparing that computed altitude $H_c$ with the observed
+$H_o$ tells us how far, and in which direction, to shift from the AP onto our true
+LOP.
+
+\section{The navigational (PZX) triangle}
+On the celestial sphere, three points form a spherical triangle: the elevated
+pole $P$, your zenith $Z$, and the body $X$. Its sides are the co-latitude
+$90\dg-\varphi$, the co-declination $90\dg-\delta$, and the co-altitude
+$90\dg-H_c$; the angle at the pole is the \textbf{local hour angle}
+$\text{LHA}=\text{GHA}-\text{(west longitude)}$ (equivalently $\text{GHA}+$ east
+longitude). Applying the spherical law of cosines to the side $90\dg-H_c$:
+\begin{equation}
+  \boxed{\;\sin H_c = \sin\varphi\,\sin\delta + \cos\varphi\,\cos\delta\,\cos(\text{LHA})\;}
+\end{equation}
+where $\varphi$ is the assumed latitude and $\delta$ the declination. The body's
+\textbf{azimuth} $Z_n$ (true bearing, measured clockwise from north) comes from
+\begin{equation}
+  \cos Z = \frac{\sin\delta - \sin H_c\,\sin\varphi}{\cos H_c\,\cos\varphi},
+  \qquad
+  Z_n = \begin{cases} Z & \text{if } \sin(\text{LHA})<0 \ (\text{LHA }180\dg\text{--}360\dg),\\
+                      360\dg - Z & \text{if } \sin(\text{LHA})>0 \ (\text{LHA }0\dg\text{--}180\dg).\end{cases}
+\end{equation}
+
+\section{The intercept, and how to plot it}
+The heart of the method is a single subtraction. Because one minute of altitude
+equals one nautical mile of distance from the GP,
+\begin{equation}
+  \boxed{\; a = 60\,(H_o - H_c)\ \text{nautical miles}\;}
+\end{equation}
+(with $H_o,H_c$ in degrees). If $H_o>H_c$ you are \emph{closer} to the body than
+the AP is, so step the intercept \textbf{Toward} the body along the azimuth $Z_n$;
+if $H_o<H_c$, step it \textbf{Away} (along $Z_n+180\dg$). A useful mnemonic is
+\emph{``Ho Mo To''} --- $H_o$ More means Toward.
+
+\textbf{To plot:} mark the AP on your sheet. Draw the azimuth line through it in
+the direction $Z_n$. Measure $a$ nautical miles along that line, Toward or Away.
+Through that point draw the LOP \emph{perpendicular} to the azimuth --- that
+perpendicular is your line of position. Repeat for a second body; where the two
+LOPs cross is your fix. A third LOP turns the small ``cocked hat'' triangle into a
+confident position.
+
+\section{Choosing the assumed position}
+To keep the arithmetic clean, navigators choose the AP cleverly: take the
+\emph{assumed latitude} as the whole degree of latitude nearest your DR, and the
+\emph{assumed longitude} with whatever minutes make the LHA come out to a whole
+number of degrees. Both examples below use this trick.
+
+\chapter{Worked example 1: a Sun sight}
+\label{ch:ex1}
+
+At sea near $40\dg$N, $30\dg$W on 2026 June~29, you take a lower-limb Sun sight.
+Your chronometer reads exactly \textbf{15:00:00 UT}. Height of eye is $3.0$ m and
+your sextant's index error is $2.0\pr$ on the arc. Work as follows (all almanac
+figures are read from Parts~II and~IV of this book).
+
+\begin{center}\input{tables/example1_work.tex}\end{center}
+
+\noindent\textbf{Reading the result.} The observed altitude exceeds the computed
+altitude by $H_o-H_c=\exOneInt\pr$, so the intercept is \textbf{\exOneInt\ nautical
+miles \exOneDir} the Sun. Plot the assumed position ($40\dg$N, $30\dg06.9\pr$W),
+draw the azimuth line toward $Z_n=\exOneZn$, step \exOneInt~nm along it \exOneDir\
+the Sun, and draw your line of position at right angles to that azimuth. A single
+Sun sight gives one LOP; a second sight a few hours later (when the Sun's azimuth
+has swung round) crosses it to give a running fix.
+
+\emph{Check it yourself:} $\sin H_c = \sin40\dg\sin(23\dg12.0\pr) +
+\cos40\dg\cos(23\dg12.0\pr)\cos(14\dg)$ gives $H_c=\exOneHc$, exactly the value in
+the workform. The whole-degree LHA of $\exOneLHA$ is what the assumed-longitude
+choice was designed to produce.
+
+\chapter{Worked example 2: latitude by the noon Sun}
+
+The simplest sight of all needs no azimuth and almost no arithmetic. When the Sun
+crosses your meridian (\emph{local apparent noon}, LAN) it bears due north or due
+south and reaches its greatest altitude. At that instant your latitude follows
+from the meridian altitude alone.
+
+At $30\dg$W the Sun transits your meridian when its GHA equals $30\dg$; from
+Part~II that occurs on 2026 June~29 at the UT shown below. Measure the Sun's
+maximum altitude, correct it to $H_o$ as before, and take the zenith distance
+$z=90\dg-H_o$. Because the Sun is south of you (its declination $23\dg$N is less
+than your latitude), your latitude is
+\[
+  \varphi = \delta + z \qquad (\text{body to the south}).
+\]
+
+\begin{center}\input{tables/example2_work.tex}\end{center}
+
+\noindent The result, $\varphi=\exTwoLat$, agrees with the true position to a
+tenth of a minute. (Had the Sun been \emph{north} of you, the rule would be
+$\varphi=\delta-z$; if you straddle the sub-solar latitude,
+$\varphi=z-\delta$ with the Sun to the south of an overhead-passing Sun. Always
+sketch the meridian to get the sign right.)
+
+\chapter{Worked example 3: a star sight}
+
+Stars are reduced exactly like the Sun, but their GHA is built in two pieces. On
+2026 January~15 at \textbf{22:00:00 UT}, from an assumed position $30\dg$N, you
+shoot the star \textbf{Sirius}. Read GHA Aries from Part~III and Sirius's SHA and
+Dec from the star table, then add:
+
+\begin{center}\input{tables/example3_work.tex}\end{center}
+
+\noindent Because a star has no semidiameter and no parallax, its sight correction
+is only index error, dip, and refraction --- simpler than the Sun. The computed
+altitude $H_c=\exThreeHc$ and azimuth $Z_n=\exThreeZn$ are then compared with your
+observed $H_o$ exactly as in Example~1 to get the intercept.
+
+\chapter{A note on longitude and time}
+
+Latitude falls out of a noon sight almost for free, but \textbf{longitude is a
+question of time}. The Earth turns $15\dg$ of longitude per hour, so every second
+of chronometer error displaces your computed longitude by a quarter of a minute of
+arc ($\approx 0.25\pr\cos\varphi$ nautical miles). This is why the marine
+chronometer was one of history's great navigational prizes: to find longitude you
+must know GMT precisely and compare it with your \emph{local} time as read from the
+Sun or stars. In the intercept method above, the chronometer time enters through
+the GHA you look up; an error in time is indistinguishable from an error in
+longitude. Keep your clock honest, log its rate, and never reduce a sight without
+the exact UT of the observation.
+
+% ============================================================
+% PART II  --- THE SUN
+% ============================================================
+\part{The Sun, 2026}
+\chapter{Daily data: meridian passage, equation of time, semidiameter}
+
+For each day of 2026 the table below gives the \textbf{meridian passage} of the
+Sun at Greenwich (the UT at which the Sun's GHA is $0\dg$, i.e.\ it crosses the
+Greenwich meridian), the \textbf{equation of time} (EoT $= 12^{\text{h}} -$
+Mer.Pass.\ $=$ apparent $-$ mean solar time; a positive value means the sundial is
+ahead of the clock), and the Sun's \textbf{semidiameter}. Note the semidiameter is
+largest in early January (Earth at perihelion) and smallest in early July.
+
+{\setlength{\tabcolsep}{3pt}\input{tables/sun_daily.tex}}
+
+\chapter{Hourly GHA and Declination of the Sun}
+
+Read the Greenwich Hour Angle and Declination of the Sun's centre for the day and
+whole hour of UT; interpolate the minutes and seconds with the Sun increment table
+in Part~IV. Entries run left to right, then top to bottom, in three columns of
+day~/~hour~/~GHA~/~Dec.
+
+\input{tables/sun_01.tex}
+\input{tables/sun_02.tex}
+\input{tables/sun_03.tex}
+\input{tables/sun_04.tex}
+\input{tables/sun_05.tex}
+\input{tables/sun_06.tex}
+\input{tables/sun_07.tex}
+\input{tables/sun_08.tex}
+\input{tables/sun_09.tex}
+\input{tables/sun_10.tex}
+\input{tables/sun_11.tex}
+\input{tables/sun_12.tex}
+
+% ============================================================
+% PART III --- ARIES & STARS
+% ============================================================
+\part{GHA Aries \& the Navigational Stars, 2026}
+\chapter{The 58 navigational stars}
+
+For each star the table gives the \textbf{Sidereal Hour Angle} (SHA, the star's
+angular distance west of the First Point of Aries) and \textbf{Declination} at
+epoch 2026.5, together with the visual magnitude. These are \emph{mean places} for
+epoch 2026.5; precession and proper motion shift them by up to about half an
+arcminute toward the ends of the year --- within this almanac's $\sim\!1\pr$ budget,
+but re-generate the tables from the source engine if you need another year. To find a star's
+GHA at your moment of observation, add its SHA to the GHA of Aries from the next
+chapter:
+\[
+  \text{GHA}_\star = \text{GHA Aries} + \text{SHA}\quad(\text{reduce modulo }360\dg).
+\]
+
+\input{tables/stars.tex}
+
+\chapter{Hourly GHA of Aries}
+
+The Greenwich Hour Angle of the First Point of Aries ($\gamma$) for each day and
+whole hour of UT. Add the star's SHA (previous chapter) for its GHA, and the Aries
+increment from Part~IV for the odd minutes and seconds. Entries run left to right,
+then top to bottom, in four columns of day~/~hour~/~GHA~$\gamma$.
+
+\input{tables/aries_01.tex}
+\input{tables/aries_02.tex}
+\input{tables/aries_03.tex}
+\input{tables/aries_04.tex}
+\input{tables/aries_05.tex}
+\input{tables/aries_06.tex}
+\input{tables/aries_07.tex}
+\input{tables/aries_08.tex}
+\input{tables/aries_09.tex}
+\input{tables/aries_10.tex}
+\input{tables/aries_11.tex}
+\input{tables/aries_12.tex}
+
+% ============================================================
+% PART IV --- CORRECTIONS & INCREMENTS
+% ============================================================
+\part{Correction \& Increment Tables}
+\chapter{Altitude corrections}
+
+\section{Dip of the horizon}
+Subtract from the sextant altitude. $\text{Dip}=1.76\sqrt{h}\pr$, $h$ in metres.
+\begin{center}\input{tables/corr_dip.tex}\end{center}
+
+\section{Atmospheric refraction}
+Subtract from the apparent altitude $H_a$. Bennett's formula; standard atmosphere.
+\begin{center}\input{tables/corr_refr.tex}\end{center}
+
+\section{Sun semidiameter}
+Add for a lower-limb sight, subtract for an upper-limb sight.
+\begin{center}\input{tables/corr_sd.tex}\end{center}
+
+\chapter{GHA increments}
+
+To find the GHA between whole-hour entries, add the increment for the elapsed
+minutes. The Sun's GHA increases at $15\dg$ per hour; Aries at $15.041\dg$ per
+hour. For the seconds, add $0.25\pr$ per second for the Sun and $0.2507\pr$ per
+second for Aries.
+\begin{center}\input{tables/corr_incr.tex}\end{center}
+
+\backmatter
+\chapter{Provenance and verification}
+\sloppy
+Every figure in this book was generated by
+\texttt{almanac/}\allowbreak\texttt{generate\_tables.wls}
+from the package \texttt{wolfram/}\allowbreak\texttt{CelestialNavigation.wl} in the repository
+\url{https://github.com/mthiel74/SextantNavigation}, whose 186-test suite checks
+the ephemeris against JPL Horizons and Meeus. Independent sanity checks performed
+at generation time confirm: the Sun's declination reaches $+23.44\dg$ at the June
+solstice and $-23.44\dg$ at the December solstice; the Sun's GHA advances
+$15.00\dg$ per hour and Aries $15.041\dg$ per hour; a bright star's SHA is stable
+to under $1\pr$ across the year; and the three worked examples close on the
+engine's own geometry to $0.0\pr$. Re-generate with
+\texttt{wolframscript -file}\allowbreak\ \texttt{almanac/}\allowbreak\texttt{generate\_tables.wls}
+and rebuild with
+\texttt{latexmk -pdf}\allowbreak\ \texttt{almanac/}\allowbreak\texttt{SextantAlmanac2026.tex}.
+
+\medskip
+\noindent\textbf{Remember the disclaimer:} educational use only, approximately one
+arcminute accuracy, not for sole-means marine navigation.
+
+\end{document}

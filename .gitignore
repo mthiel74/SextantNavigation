@@ -6,3 +6,11 @@ community/.img-cache/
 .superpowers/
 docs/superpowers/
 .remember/
+
+# LaTeX build artifacts (almanac)
+almanac/*.aux
+almanac/*.fdb_latexmk
+almanac/*.fls
+almanac/*.log
+almanac/*.out
+almanac/*.toc
