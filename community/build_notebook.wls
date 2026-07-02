@@ -1563,8 +1563,7 @@ para[{ital["Tools."], " Every ", bold["data figure and computed result"],
    " is pure ", bold["Wolfram Language"], ", in three packages (",
    mono["CelestialNavigation.wl"], ", ", mono["SextantFigures.wl"], ", ",
    mono["SextantInteractive.wl"], "). The notebook was assembled \
-programmatically via ", mono["wolframscript"], ". The repository skeleton and \
-build pipeline were assembled with the help of Anthropic's Claude Code."}],
+programmatically via ", mono["wolframscript"], "."}],
 
 para[{ital["Illustrative art."], " The five atmospheric section-opening images \
 (the navigator, the celestial dome, the chronometer, the lunar-distance sight, \
