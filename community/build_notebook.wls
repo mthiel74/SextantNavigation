@@ -162,13 +162,16 @@ illusResized[file_String] := Module[{path, cached, im, w, h},
    and the image cell is silently dropped.) *)
 illusCell[file_String, caption_String] := Module[{full, hi, jp},
    full = Import[FileNameJoin[{illusDir, file}]];
-   hi   = If[Head[full] === Image, ImageResize[full, 700], full];
+   hi   = If[Head[full] === Image, ImageResize[full, 560], full];
    (* Photographic art: a JPEG round-trip stores ~40% smaller in the .nb than PNG
       with no visible loss, so we can embed higher-res (700 px) data than before
       AND shrink the file. Displayed at illusWidth on the page. *)
    jp   = If[Head[hi] === Image,
-            ImportString[ExportString[hi, {"JPEG", "CompressionLevel" -> 0.55}], "JPEG"],
+            Quiet @ Check[
+              ImportString[ExportString[hi, "JPEG", "CompressionLevel" -> 0.55], "JPEG"],
+              hi],
             hi];
+   If[Head[jp] =!= Image, jp = hi];   (* never embed a broken/blank image *)
    If[Head[jp] =!= Image, Print["  !! illustration failed to load: ", file]];
    {Cell[BoxData @ ToBoxes[Image[jp, ImageSize -> illusWidth]], "Output",
         ShowCellLabel -> False, TextAlignment -> Center,
