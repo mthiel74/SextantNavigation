@@ -66,7 +66,7 @@ Begin["`Private`"];
 (* Capture the package directory ONCE at load time (mirrors cnPackageDir). *)
 sxPkgDir = DirectoryName[$InputFileName];
 
-sxFigVersion[] := "SextantFigures 1.0";
+sxFigVersion[] := "SextantFigures v1.0.0";
 
 (* Data-file path resolver: data/ is a sibling of wolfram/. *)
 sxDataFile[name_String] := FileNameJoin[{sxPkgDir, "..", "data", name}];

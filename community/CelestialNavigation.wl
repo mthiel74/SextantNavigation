@@ -104,7 +104,7 @@ Begin["`Private`"];
    is Get-loaded from a notebook or other directory. *)
 cnPackageDir = DirectoryName[$InputFileName];
 
-cnVersion[] := "0.1.0";
+cnVersion[] := "1.0.0";
 
 cnDip[h_?NumericQ] := 1.76 Sqrt[h];                         (* arcmin, h in metres *)
 cnRefraction[hApp_?NumericQ] := Cot[(hApp + 7.31/(hApp + 4.4)) Degree]; (* Bennett, arcmin *)

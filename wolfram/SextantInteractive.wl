@@ -40,7 +40,7 @@ sxManipSightPlanningPreview::usage = "sxManipSightPlanningPreview[] returns the 
 
 Begin["`Private`"];
 
-sxManipVersion[] := "SextantInteractive 1.0";
+sxManipVersion[] := "SextantInteractive v1.0.0";
 
 (* Shared light-theme palette *)
 $navy   = RGBColor[0.13, 0.29, 0.53];

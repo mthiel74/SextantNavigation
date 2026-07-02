@@ -1,3 +1,3 @@
 {
-  VerificationTest[cnVersion[], "0.1.0", TestID -> "smoke-version"]
+  VerificationTest[cnVersion[], "1.0.0", TestID -> "smoke-version"]
 }
