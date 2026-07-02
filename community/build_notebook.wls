@@ -143,7 +143,7 @@ imgWidth = 640;
         Resize the ~1536x1024 PNGs to ~600 px wide, cache, embed with an
         italic caption that CLEARLY states the image is AI-generated. ---- *)
 illusDir   = FileNameJoin[{repoRoot, "docs", "images", "illustrations"}];
-illusWidth = 560;
+illusWidth = 512;
 illusResized[file_String] := Module[{path, cached, im, w, h},
    path   = FileNameJoin[{illusDir, file}];
    cached = FileNameJoin[{imgCacheDir, "illus_" <> FileBaseName[file] <> "_480.png"}];
@@ -162,13 +162,13 @@ illusResized[file_String] := Module[{path, cached, im, w, h},
    and the image cell is silently dropped.) *)
 illusCell[file_String, caption_String] := Module[{full, hi, jp},
    full = Import[FileNameJoin[{illusDir, file}]];
-   hi   = If[Head[full] === Image, ImageResize[full, 560], full];
+   hi   = If[Head[full] === Image, ImageResize[full, 512], full];
    (* Photographic art: a JPEG round-trip stores ~40% smaller in the .nb than PNG
       with no visible loss, so we can embed higher-res (700 px) data than before
       AND shrink the file. Displayed at illusWidth on the page. *)
    jp   = If[Head[hi] === Image,
             Quiet @ Check[
-              ImportString[ExportString[hi, "JPEG", "CompressionLevel" -> 0.55], "JPEG"],
+              ImportString[ExportString[hi, "JPEG", "CompressionLevel" -> 0.7], "JPEG"],
               hi],
             hi];
    If[Head[jp] =!= Image, jp = hi];   (* never embed a broken/blank image *)
