@@ -1,0 +1,8 @@
+.DS_Store
+*.tmp
+data/raw/
+community/.img-cache/
+# local development scaffolding — not part of the published post
+.superpowers/
+docs/superpowers/
+.remember/
